@@ -2,7 +2,7 @@ const ansi = require('ansi');
 const cursor = ansi(process.stdout);
 
 cursor.hex('#AAAAAA').bold().bg.hex('#77D300');
-let star = '*';
+let star = '^';
 let cols = cols2 = trunk = 8; // Общая настройка высоты дерева
 let j = 1;
 
