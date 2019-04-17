@@ -21,8 +21,8 @@ const {User} = require('./models');
 passport.use(new LocalStrategy(async (username, password, done) => { // Стратегия авторизации по логину и паролю | done калбек который мы вызываем после попытки авторизации удачной или нет
   // console.log('LocalStrategy выполнилась, ' + username + password);
   const user = await User.findOne({login: username});
-  console.log('user.hash: ' + user.hash);
-  if(user && user.hash === user.checkPassword(password)) {  
+  console.log('user.checkPassword(password) ' + user.checkPassword(password));
+  if(user && user.checkPassword(password)) {  
     console.log('Проверка пройдена!');
     delete user.password;
     return done(null, user); // удалить из юзера значимую информацию (пароли и пр)
@@ -42,7 +42,7 @@ passport.deserializeUser(async (id, done) => { // Восстанавливает
 });
 
 const authHandler = passport.authenticate('local', {
-  successRedirect: '/auth2',
+  successRedirect: '/',
   failureRedirect: '/user/auth',
 });
 
