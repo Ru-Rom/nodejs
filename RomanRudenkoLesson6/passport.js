@@ -32,14 +32,20 @@ passport.serializeUser((user, done) => {
   done(null, user._id);
 });
 
-passport.deserializeUser(async (id, done) => {
+passport.deserializeUser(async (id, done) => { // Восстанавливает данные пользователя из базы по айди
   const user = await User.findById(id);
-  done(null, user); // удалить из юзера значимую информацию (пароли и пр)
+  delete user.password;
+  done(null, user);
 });
 
 const authHandler = passport.authenticate('local', {
   successRedirect: '/auth2',
-  failureRedirect: '/auth',
+  failureRedirect: '/user/auth',
 });
 
-module.exports = { passport, authHandler };
+// module.exports = { passport, authHandler };
+
+module.exports = {
+  passport: passport,
+  authHandler: authHandler
+} 

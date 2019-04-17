@@ -9,7 +9,7 @@ const mustBeAuthenticated = (req, res, next) => {
     if(req.user) {
       next();
     } else {
-      res.redirect('/auth');
+      res.redirect('/user/auth');
     }
   }
 

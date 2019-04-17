@@ -3,10 +3,23 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 const {User} = require('../models');
+const passports = require('../passport');
+//const passport = passportmodule.passport;
+const authHandler = passports.authHandler;
+
+
+// const authHandler = passport.authenticate('local', {
+//   successRedirect: '/auth2',
+//   failureRedirect: '/auth',
+// });
 
 // routes
-router.post('/auth', urlencodedParser, async (req, res) => {
+router.post('/auth', authHandler, urlencodedParser, async (req, res) => {
   
+});
+
+router.get('/auth', urlencodedParser, async (req, res) => {
+  res.render('auth');
 });
 
 router.post('/signup', urlencodedParser, async (req, res) => {
