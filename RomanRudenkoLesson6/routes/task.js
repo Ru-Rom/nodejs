@@ -7,6 +7,7 @@ const {Task} = require('../models');
 const mustBeAuthenticated = (req, res, next) => {
     console.log('mustBeAuthenticated выполнился');
     if(req.user) {
+      сonsole.log('req.user', req.user);
       next();
     } else {
       res.redirect('/user/auth');
